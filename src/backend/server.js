@@ -2,6 +2,7 @@ var express = require('express');
 var port = 3000;
 var app = express();
 var cookieParser = require('cookie-parser');
+var authenticate = require('./middleware/authenticate');
 
 // need cookieParser middleware before we can do anything with cookies
 app.use(cookieParser());
@@ -9,29 +10,7 @@ app.use(cookieParser());
 //TODO add the protected routes directly by traverising the directory
 const protectedPaths = ["edit.html"];
 
-app.use(function(req, res, next) {
-    const formatterPath = req.path.substring(1, req.path.length);
-    console.log(formatterPath);
-
-    let isProtectedRoute = false;
-    if (protectedPaths.includes(formatterPath)) {
-        isProtectedRoute = true;
-    }
-    if (isProtectedRoute) {
-        /*
-            if (validCookie()) {
-                next()
-                return;
-            }
-            res.status(403).redirect('/login.html');
-        */
-        //TODO add auth
-        console.warn("no authentication done");
-        next();
-    } else {
-        next();
-    }
-});
+app.use(authenticate(protectedPaths));
 
 //to serve static files
 app.use(express.static(__dirname + '/../../build/'));
