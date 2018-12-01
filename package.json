@@ -1,0 +1,14 @@
+{
+  "name": "blog-website",
+  "description": "My blog website code base",
+  "dependencies": {
+    "cookie-parser": "1.4.3",
+    "express": "4.16.4",
+    "react": "v16.6.3"
+  },
+  "repository": "https://github.com/schandrasekhar/blog-website",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/backend/server.js"
+  }
+}
