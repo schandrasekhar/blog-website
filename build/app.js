@@ -10,6 +10,16 @@ var quill = new Quill('#editor', {
   theme: 'snow'  // or 'bubble'
 });
 
+var toolbar = quill.getModule('toolbar');
+toolbar.addHandler('image', imageHandler);
+
+
+var imageHandler = function() {
+  var range = this.quill.getSelection();
+  var value = prompt('What is the image URL');
+  this.quill.insertEmbed(range.index, 'image', value, Quill.sources.USER);
+}
+
 var save = function() {
     var xhttp = new XMLHttpRequest();
     var delta = quill.getContents();
