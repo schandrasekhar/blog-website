@@ -18,7 +18,7 @@ var imageHandler = function() {
   var range = this.quill.getSelection();
   var value = prompt('What is the image URL');
   this.quill.insertEmbed(range.index, 'image', value, Quill.sources.USER);
-}
+};
 
 var save = function() {
     var xhttp = new XMLHttpRequest();
@@ -45,4 +45,16 @@ var save = function() {
     xhttp.open("POST", "edit.html", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(postData));
+};
+
+var idGenerator = function() {
+  return Math.random() * 1e18;
+};
+
+var createPostId = function() {
+  document.getElementById("blogpostid").innerHTML = idGenerator();
+};
+
+window.onload = function() {
+  createPostId();
 };
